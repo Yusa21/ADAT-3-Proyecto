@@ -28,7 +28,7 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
 
 **Notas:**
 - El `id` se crea usando las tres primeras letras del nombre, y de los apellidos más un número aleatorio al final.
-- El `dni` tiene que seguir las restricciones que aseguran que sea correcto.
+- El `dni` tiene que seguir las restricciones que aseguran que sea correcto (AKA que la letra sea la correcta segun los numeros).
 
 ---
 
