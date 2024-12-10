@@ -56,7 +56,7 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
 **Notas:**
 - El `id` se forma con las tres primeras letras del nombre del destino y del país más cuatro caracteres aleatorios.
 
-###3. Diagrama entidad-relación
+### 3. Diagrama Clase-Entidad
 
   ![Diagrama ClaseEntidad drawio](https://github.com/user-attachments/assets/1ab8161d-8bd8-4c0c-b30c-0b3065812e36)
 
