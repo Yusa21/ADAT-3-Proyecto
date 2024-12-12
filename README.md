@@ -4,7 +4,7 @@
 
 ### 1. Idea
 
-Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
+Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos). El objetivo es que la API permita a grupos de personas sincronizarse para hacer viajes.
 
 **Idea:** Aplicación de gestión de viajes en grupo
 
@@ -18,17 +18,20 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
 ### 2. Tablas
 
 #### Tabla Usuarios
-| Campo        | Tipo   | Restricciones                                   |
+| Campo        | Tipo   | Restricciones                                  |
 |--------------|--------|------------------------------------------------|
-| **id**       | String | UNIQUE, PRIMARY KEY, 10 caracteres            |
-| **name**     | String | NOT NULL, Máximo 20 caracteres                 |
-| **surname**  | String | NOT NULL, Máximo 50 caracteres                 |
-| **birthdate**| Date   | NOT NULL                                       |
-| **dni**      | String | NOT NULL, 9 caracteres                        |
+| **id**       | String | UNIQUE, PRIMARY KEY, 10 caracteres             |
+| **username** | String | 30 caracteres                                  |
+| **password** | String |                                                |
+| **roles**    | String | ENUM: ROL_USER, ROL_ADMIN                      |
+| **dni**      | String | NOT NULL, 9 caracteres                         |
 
 **Notas:**
-- El `id` se crea usando las tres primeras letras del nombre, y de los apellidos más un número aleatorio al final.
-- El `dni` tiene que seguir las restricciones que aseguran que sea correcto (AKA que la letra sea la correcta segun los numeros).
+- El `id` autogenerado.
+- El `dni` tiene que seguir las restricciones que aseguran que sea correcto (que las letras sean las correctas segun los numeros).
+
+**Descripción:**
+- Usuarios de la aplicación
 
 ---
 
@@ -38,11 +41,13 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
 | **id**             | String       | UNIQUE, PRIMARY KEY, 10 caracteres             |
 | **destination**    | Destino      | SECONDARY KEY                                   |
 | **date**           | Date         |                                                 |
-| **method_of_travel** | String      | ENUM: Car, Bus, Train, Plane, Boat             |
+| **method_of_travel** | String     | ENUM: car, bus, train, plane, boat             |
 | **participants**   | Usuario      | SECONDARY KEY                                   |
 
 **Notas:**
-- El `id` se crea usando las tres primeras letras del destino más las tres primeras letras del método de viaje. Después se añaden cuatro caracteres aleatorios.
+- El `id` autogenerado.
+- La llave secundaria destination apunta solo a un destino
+- Varios usuarios pueden estar en el mismo viaje
 
 ---
 
@@ -54,9 +59,53 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos).
 | **country**| String | NOT NULL, Máximo 20 caracteres                 |
 
 **Notas:**
-- El `id` se forma con las tres primeras letras del nombre del destino y del país más cuatro caracteres aleatorios.
+- El `id` autogenerado.
 
 ### 3. Diagrama Clase-Entidad
 
   ![Diagrama ClaseEntidad drawio](https://github.com/user-attachments/assets/1ab8161d-8bd8-4c0c-b30c-0b3065812e36)
+
+### 4. Endpoints
+
+**Usuarios:**
+
+- POST (/usuarios/login)
+  Permite a los usuarios iniciar sesión
+- POST (/usuarios/register)
+  Permite a los usuarios registrarse
+
+**Viajes**
+- POST (/viajes)
+  Permite añadir viajes 
+- GET (/viajes)
+  Devuelve todas las reservas
+- GET (/viajes/id)
+  Devuelve el viaje segun el id
+- PUT (/viajes/id)
+  Actualiza el viaje segun el id
+- PUT (/viajes/id)
+  Cambia el metodo de viaje
+- PUT (/viajes/id)
+  Añade o elimina un participante del viaje
+- DELETE (/viajes/id)
+  Borra el viaje segun la id
+
+**Destinos**
+- POST (/destinos)
+  Añade un nuevo destino
+- GET (/destinos)
+  Devuelve todos los destinos
+- GET (/destinos/id)
+  Devuelve un destino por su id
+- GET (/destinos)
+  Devuelve todos los destinos que esten en un pais concreto
+- PUT (/destinos/id)
+  Actualiza el destino segun su id
+
+
+
+
+
+
+   
 
