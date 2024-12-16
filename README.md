@@ -103,6 +103,18 @@ Voy a hacer una API REST de gestión de viajes en grupo (uno de los ejemplos). E
   Actualiza el destino segun su id
 
 
+### 5. Lógica de negocio
+
+Puede haber hasta 50 personas registradas en el mismo viaje
+
+Los usuarios solo pueden acceder al los viajes en los que estén registrados
+-Si se intenta entrar si derechos de admin la respuesta es: 403 Forbidden
+Los administradores peuden acceder a todos los viajes y son los únicos que pueden modificar los destinos
+-Si se intenta entrar si derechos de admin la respuesta es: 403 Forbidden
+No se pueden modificar las fechas de viaje a días anteriores a hoy
+-Si se intenta devuelve: 416 Requested Range Not Satisfiable
+
+
 
 
 
